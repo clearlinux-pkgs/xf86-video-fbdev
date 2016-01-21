@@ -4,7 +4,7 @@
 #
 Name     : xf86-video-fbdev
 Version  : 0.4.4
-Release  : 1
+Release  : 2
 URL      : http://xorg.freedesktop.org/releases/individual/driver/xf86-video-fbdev-0.4.4.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/driver/xf86-video-fbdev-0.4.4.tar.gz
 Summary  : No detailed summary available
@@ -40,6 +40,8 @@ lib components for the xf86-video-fbdev package.
 %setup -q -n xf86-video-fbdev-0.4.4
 
 %build
+export CFLAGS="-O2 -g"
+unset LDFLAGS
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
