@@ -4,14 +4,15 @@
 #
 Name     : xf86-video-fbdev
 Version  : 0.4.4
-Release  : 16
+Release  : 17
 URL      : http://xorg.freedesktop.org/releases/individual/driver/xf86-video-fbdev-0.4.4.tar.gz
 Source0  : http://xorg.freedesktop.org/releases/individual/driver/xf86-video-fbdev-0.4.4.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
 Requires: xf86-video-fbdev-lib
-Requires: xf86-video-fbdev-doc
+Requires: xf86-video-fbdev-license
+Requires: xf86-video-fbdev-man
 BuildRequires : pkgconfig(fontsproto)
 BuildRequires : pkgconfig(pciaccess)
 BuildRequires : pkgconfig(xorg-macros)
@@ -22,20 +23,29 @@ BuildRequires : pkgconfig(xproto)
 xf86-video-fbdev - video driver for framebuffer device
 Please submit bugs & patches to the Xorg bugzilla:
 
-%package doc
-Summary: doc components for the xf86-video-fbdev package.
-Group: Documentation
-
-%description doc
-doc components for the xf86-video-fbdev package.
-
-
 %package lib
 Summary: lib components for the xf86-video-fbdev package.
 Group: Libraries
+Requires: xf86-video-fbdev-license
 
 %description lib
 lib components for the xf86-video-fbdev package.
+
+
+%package license
+Summary: license components for the xf86-video-fbdev package.
+Group: Default
+
+%description license
+license components for the xf86-video-fbdev package.
+
+
+%package man
+Summary: man components for the xf86-video-fbdev package.
+Group: Default
+
+%description man
+man components for the xf86-video-fbdev package.
 
 
 %prep
@@ -46,11 +56,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507171664
+export SOURCE_DATE_EPOCH=1530820837
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -60,17 +70,23 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1507171664
+export SOURCE_DATE_EPOCH=1530820837
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/xf86-video-fbdev
+cp COPYING %{buildroot}/usr/share/doc/xf86-video-fbdev/COPYING
 %make_install
 
 %files
 %defattr(-,root,root,-)
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man4/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/xorg/modules/drivers/fbdev_drv.so
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/xf86-video-fbdev/COPYING
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man4/fbdev.4
