@@ -1,3 +1,157 @@
+commit 82aa13d01340236ebb516ea45a9bd78e4fe52b79
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Wed May 30 12:17:13 2018 -0400
+
+    fbdev 0.5.0
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit 67525c485f3b32ce0c9bff250d905852f75dfc1c
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Wed May 30 12:31:04 2018 -0400
+
+    Update for 1.20 ABI
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit 9af7f81534aa03fe01d88786805b00729ac321e9
+Author: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date:   Sun Mar 4 17:34:06 2018 -0800
+
+    Use #ifdef instead of #if to avoid build error
+    
+    fbdev.c:491:21: error: #if with no expression
+     #if HAVE_SHADOW_3224
+                         ^
+    
+    Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+    Reviewed-by: Adam Jackson <ajax@redhat.com>
+
+commit e0bce0d017c5e1597aa8269551355e1ddeb3c8fb
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Thu Jan 5 14:36:51 2017 -0500
+
+    Use shadowUpdate32to24 at 24bpp
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit 3cf99231199bd5bd9e681e85d9da1f9eb736e3e7
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Thu Jan 5 14:14:48 2017 -0500
+
+    Remove dead pix24bpp variable
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit 8c03e3474edc826e16524898eaa1195070536ac8
+Author: Mihail Konev <k.mvc@ya.ru>
+Date:   Thu Jan 26 14:00:22 2017 +1000
+
+    autogen: add default patch prefix
+    
+    Signed-off-by: Mihail Konev <k.mvc@ya.ru>
+
+commit 39f668420f2615d1642f0b823930738936f90fcd
+Author: Emil Velikov <emil.l.velikov@gmail.com>
+Date:   Mon Mar 9 12:00:52 2015 +0000
+
+    autogen.sh: use quoted string variables
+    
+    Place quotes around the $srcdir, $ORIGDIR and $0 variables to prevent
+    fall-outs, when they contain space.
+    
+    Signed-off-by: Emil Velikov <emil.l.velikov@gmail.com>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 303f902c76cb951eeb753eec62f98ed97ac100a8
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Jan 24 10:32:07 2017 +1000
+
+    autogen.sh: use exec instead of waiting for configure to finish
+    
+    Syncs the invocation of configure with the one from the server.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Emil Velikov <emil.velikov@collabora.com>
+
+commit f62731959955bc4e48721ab258cb5e3cd6761d65
+Author: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date:   Sun Jun 1 21:03:14 2014 -0700
+
+    autogen.sh: Honor NOCONFIGURE=1
+    
+    See http://people.gnome.org/~walters/docs/build-api.txt
+    
+    Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+
+commit 22f288b4e478e68877cb8e1cc0c470d11d73c0db
+Author: Alan Coopersmith <alan.coopersmith@oracle.com>
+Date:   Sun Jun 1 21:03:13 2014 -0700
+
+    configure: Drop AM_MAINTAINER_MODE
+    
+    Signed-off-by: Alan Coopersmith <alan.coopersmith@oracle.com>
+
+commit 2c5eba85740e6a7ced8ada0ee45fdd74e4bca364
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Wed Jan 4 10:30:08 2017 -0500
+
+    Fix shadow fb allocation size (v2)
+    
+    ->bitsPerPixel is rather obviously eight times too large.
+    
+    v2: Use ->displayWidth - the pitch - not ->virtualX (Keith Packard)
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+    Reviewed-by: Alex Deucher <alexander.deucher@amd.com>
+
+commit 66e7909bfefd93c05aa37d0cadccc5348f0382be
+Author: Pascal Terjan <pterjan@google.com>
+Date:   Fri Jan 22 00:26:22 2016 +0000
+
+    Initialize pci_dev
+    
+    Else it is read before initialization if XSERVER_LIBPCIACCESS is not
+    defined or location.type is not BUS_PCI.
+    
+    Noticed when I got a segfault where it was 0x1 while doing some tests on
+    arm.
+    
+    Signed-off-by: Pascal Terjan <pterjan@google.com>
+    Reviewed-by: Emil Velikov <emil.l.velikov@gmail.com>
+
+commit ae0aeffae6657464f610da13e7b3349d0d97e81b
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Mon Aug 11 12:07:54 2014 -0400
+
+    Pass the pci device (if any) through to fbdevhw in probe and preinit
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit 2673e727063fe28310836f1e6e9eda552930218a
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Wed May 21 09:49:56 2014 -0400
+
+    Use own thunk functions instead of fbdevHW*Weak
+    
+    I plan to remove the Weak functions from a future server.
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit dd1cf1028c3f0de77d075c4a169011518baab0f4
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Fri Mar 21 12:20:01 2014 -0400
+
+    Default to 32bpp if the console is 8bpp (and we weren't told otherwise)
+    
+    You can still override this on the command line or in the config file.
+    Without this we'll come up at 8bpp on matroxfb (and probably others),
+    which among other things breaks the default desktop since gnome-shell
+    wants GLX and GLX doesn't support pseudocolor anymore.
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
 commit 679ed9a4e6b54227df191c580e3ef641e075db19
 Author: Julien Cristau <jcristau@debian.org>
 Date:   Mon Sep 23 20:02:47 2013 +0200
