@@ -6,7 +6,7 @@
 #
 Name     : xf86-video-fbdev
 Version  : 0.5.0
-Release  : 852
+Release  : 853
 URL      : https://www.x.org/releases/individual/driver/xf86-video-fbdev-0.5.0.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-fbdev-0.5.0.tar.gz
 Source99 : https://www.x.org/releases/individual/driver/xf86-video-fbdev-0.5.0.tar.gz.sig
